@@ -1,0 +1,8 @@
+### Create
+POST localhost:8080/draw
+Content-Type: application/json
+
+{
+  "deckId": "ccf6e3d5-9b92-41f2-9b59-3b8b1df0c658",
+  "count": 1
+}
