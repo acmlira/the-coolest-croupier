@@ -1,10 +1,14 @@
-package acmlira.thecoolestcroupier.model;
+package acmlira.thecoolestcroupier.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.NoArgsConstructor;
 
+@Getter
+@Setter
 @NoArgsConstructor
-public class Card {
+public class CardDTO {
     @JsonProperty("code")
     private String code;
     @JsonProperty("value")

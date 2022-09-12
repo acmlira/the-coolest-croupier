@@ -1,6 +1,6 @@
 package acmlira.thecoolestcroupier.service;
 
-import acmlira.thecoolestcroupier.model.Deck;
+import acmlira.thecoolestcroupier.dto.DeckDTO;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.apachecommons.CommonsLog;
@@ -11,8 +11,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 @CommonsLog(topic = "Consumer Logger")
-public class DeckConsumer {
-
+public class DecksConsumer {
 
     @Value("${app.kafka.topic.name.consumer}")
     private String topicName;
@@ -21,8 +20,8 @@ public class DeckConsumer {
     public void consume(ConsumerRecord<String, String> record) {
         ObjectMapper mapper = new ObjectMapper();
         try {
-            Deck deck = mapper.readValue(record.value(), Deck.class);
-            log.info(String.format("Consumed message -> %s", deck.getDeckId()));
+            DeckDTO deckDTO = mapper.readValue(record.value(), DeckDTO.class);
+            log.info(String.format("Consumed message -> %s", deckDTO.getDeckId()));
         } catch (JsonProcessingException e) {
             throw new RuntimeException(e);
         }
