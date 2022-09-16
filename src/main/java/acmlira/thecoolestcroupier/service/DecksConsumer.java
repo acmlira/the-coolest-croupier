@@ -12,11 +12,10 @@ import org.springframework.stereotype.Service;
 @Service
 @CommonsLog(topic = "Consumer Logger")
 public class DecksConsumer {
-
+    @KafkaListener(topics = "decks")
     @Value("${app.kafka.topic.name.consumer}")
     private String topicName;
 
-    @KafkaListener(topics = "decks", groupId = "group_id")
     public void consume(ConsumerRecord<String, String> record) {
         ObjectMapper mapper = new ObjectMapper();
         try {
