@@ -1,6 +1,5 @@
 package acmlira.thecoolestcroupier.dto;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.NoArgsConstructor;
@@ -12,8 +11,6 @@ import java.util.UUID;
 @Setter
 @NoArgsConstructor
 public class DeckDTO {
-    @JsonProperty("deckId")
     private UUID deckId;
-    @JsonProperty("cards")
-    private List<CardDTO> cardDTOS;
+    private List<CardDTO> cards;
 }
