@@ -1,5 +1,5 @@
 ### Create
-POST localhost:8080/draw
+POST localhost:8917/the-coolest-croupier/v1/draw
 Content-Type: application/json
 
 {
