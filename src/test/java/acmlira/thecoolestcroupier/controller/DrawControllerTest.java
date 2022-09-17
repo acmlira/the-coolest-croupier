@@ -1,23 +1,22 @@
 package acmlira.thecoolestcroupier.controller;
 
 import acmlira.thecoolestcroupier.controller.request.DrawRequest;
-import acmlira.thecoolestcroupier.dto.DrawDTO;
+import acmlira.thecoolestcroupier.mock.DrawMock;
+import acmlira.thecoolestcroupier.model.Draw;
 import acmlira.thecoolestcroupier.service.DrawService;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
+
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.mock.web.MockHttpServletRequest;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
 
-import java.util.ArrayList;
-import java.util.UUID;
-
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
-import static org.assertj.core.api.Assertions.assertThat;
 
 @ExtendWith(MockitoExtension.class)
 public class DrawControllerTest {
@@ -28,25 +27,19 @@ public class DrawControllerTest {
     @Mock
     private DrawService drawService;
 
-
     @Test
     public void create() {
         MockHttpServletRequest request = new MockHttpServletRequest();
         RequestContextHolder.setRequestAttributes(new ServletRequestAttributes(request));
 
-        DrawDTO drawDTO = new DrawDTO();
-        drawDTO.setDeckId(UUID.randomUUID());
-        drawDTO.setCount(0);
-        drawDTO.setCards(new ArrayList<>());
+        Draw draw = DrawMock.getDraw();
 
-        when(drawService.create(any())).thenReturn(drawDTO);
+        when(drawService.create(any())).thenReturn(draw);
 
         DrawRequest drawRequest = new DrawRequest();
-        drawRequest.setDeckId(drawDTO.getDeckId());
-        drawRequest.setCount(drawDTO.getCount());
+        drawRequest.setDeckId(draw.getDeckId());
+        drawRequest.setCount(draw.getCount());
 
-        assertThat(drawController.create(drawRequest)).isEqualTo(drawDTO);
+        assertEquals(drawController.create(drawRequest), draw);
     }
-
-
 }

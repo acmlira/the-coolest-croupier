@@ -6,6 +6,12 @@ spring:
       value-deserializer: "org.apache.kafka.common.serialization.StringDeserializer"
       group-id: "consumer-decks"
       enable-auto-commit: true
+  redis:
+    database: 0
+    host: "localhost"
+    connect-timeout: 500ms
+    port: 6379
+    timeout: 500ms
 
 server:
   port: 8917
