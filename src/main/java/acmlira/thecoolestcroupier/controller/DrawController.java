@@ -12,7 +12,7 @@ import java.util.ArrayList;
 
 @RequiredArgsConstructor
 @RestController
-@RequestMapping(value = "/draw")
+@RequestMapping(value = "v1/draw")
 public class DrawController {
 
     @Autowired
