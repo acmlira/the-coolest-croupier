@@ -1,10 +1,10 @@
 package acmlira.thecoolestcroupier.service;
 
+import acmlira.thecoolestcroupier.client.TheCoolestShufflerClient;
 import acmlira.thecoolestcroupier.mock.DeckMock;
 import acmlira.thecoolestcroupier.mock.DrawMock;
 import acmlira.thecoolestcroupier.model.Deck;
 import acmlira.thecoolestcroupier.model.Draw;
-import acmlira.thecoolestcroupier.repository.DeckRepository;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -19,19 +19,18 @@ import static org.mockito.BDDMockito.when;
 @ExtendWith(MockitoExtension.class)
 public class DrawServiceTest {
 
-    @InjectMocks
+    @Mock
     private DrawService drawService;
 
-    @Mock
-    private DeckRepository deckRepository;
+    @InjectMocks
+    private TheCoolestShufflerClient theCoolestShufflerClient;
 
     @Test
     public void shouldCreateDraw() {
         Deck deck = DeckMock.getDeck();
         Draw draw = DrawMock.getDraw();
 
-        when(deckRepository.findById(any())).thenReturn(deck);
-        when(deckRepository.save(any())).thenReturn(deck);
+        when(theCoolestShufflerClient.findDeckById(any())).thenReturn(deck);
 
         assertEquals(drawService.create(draw), draw);
     }

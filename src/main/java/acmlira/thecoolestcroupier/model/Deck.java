@@ -3,8 +3,6 @@ package acmlira.thecoolestcroupier.model;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.redis.core.RedisHash;
 
 import java.io.Serializable;
 import java.util.List;
@@ -13,11 +11,12 @@ import java.util.UUID;
 @Getter
 @Setter
 @NoArgsConstructor
-@RedisHash("Deck")
 public class Deck implements Serializable {
-    @Id
     private UUID deckId;
     private List<Card> cards;
+    private Integer remaining;
+    private Boolean shuffle;
+    private Integer amount;
 
     @Override
     public boolean equals(Object o) {
